@@ -1,34 +1,78 @@
 <div class="container">
+  <h1 class="text-center site-header">Welcome to MyStance</h1>
+  <h2 class="text-center site-subheader">The world's opinions in three boxes.</h2>
 
-  <div>
-    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  <div class="container">
+    <div class="topic-label col-md-3">TOPIC:</div>
+    <div class="topic-container col-md-9">Should all U.S. citizens be allowed to own a firearm? {{topicController.topic.question}}</div>
   </div>
 
-  <div class="jumbotron text-center">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">
-      <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-      Always a pleasure scaffolding your apps.
-    </p>
-    <p class="animated infinite" ng-class="main.classAnimation">
-      <button type="button" class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid Toastr</button>
-    </p>
-    <p>
-      With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
-    </p>
-  </div>
-
+  <h3></h3>
   <div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-      <div class="thumbnail">
-        <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-        <div class="caption">
-          <h3>{{ awesomeThing.title }}</h3>
-          <p>{{ awesomeThing.description }}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{ awesomeThing.url }}</a></p>
+    <div class="col-md-6 side">
+      <h4 class="no">NO</h4>
+      <div class="reasons-container">
+        <div class="row reason">
+          <div class="reason-name col-md-9">Too many mass shootings</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
+          <button class="reason-custom-button col-md-3 no-button">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 side">
+      <h4 class="yes">YES</h4>
+      <div class="reasons-container">
+        <div class="row reason">
+          <div class="reason-name col-md-9">2nd Amendment</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
+          <button class="reason-custom-button col-md-3 yes-button">Add</button>
         </div>
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 side">
+      <h4 class="maybe">MAYBE</h4>
+      <div class="reasons-container">
+        <div class="row reason">
+          <div class="reason-name col-md-9">I can see both sides</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <div class="reason-name col-md-9">...</div>
+          <div class="count col-md-3">234</div>
+        </div>
+        <div class="row reason">
+          <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
+          <button class="reason-custom-button col-md-3 maybe-button">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

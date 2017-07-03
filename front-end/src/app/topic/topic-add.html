@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Add a topic</h1>
+  <form name="add-topic" ng-submit="topic.addTopic()">
+    <div class="row">
+      <label for="question">Question</label>
+      <input ng-model="topic.topic.question" type="text" id="question" placeholder="e.g. 'Should all US Citizens be allowed to own a firearm?'" class="col-md-12" />
+    </div>
+    <button type="submit" class="btn btn-default">Submit Topic</button>
+</div>

@@ -12,6 +12,7 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 // bower:scss
 // endbower
 
+// DEFAULT STUFF
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -26,6 +27,108 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
     width: 50px;
   }
 }
+
+// GENERAL
+.site-header {
+    font-size: 50pt;
+    padding-top: 25px;
+}
+
+.site-subheader {
+    // TODO
+}
+
+.topic-label {
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: 35px;
+    font-size: 20pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+.topic-container {
+    font-size: 20pt;
+    text-align: center;
+    background-color: silver;
+}
+
+.side {
+    background-color: whitesmoke;
+    margin-top: 25px;
+    padding: 0px;
+}
+
+.side > h4 {
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding: 10px;
+    font-size: 30px;
+}
+
+.no {
+    background-color: teal;
+}
+
+.yes {
+    background-color: #5cd65c;
+}
+
+.maybe {
+    background-color: silver;
+}
+
+.reasons-container {
+    height: 200px;
+}
+
+.reason {
+    margin: 0px;
+    font-size: 15pt;
+    color: white;
+    font-size: 15pt;
+}
+
+.reason-name {
+    background-color: silver;
+    padding: 10px;
+    color: white;
+    background-color: silver;
+}
+
+.count {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.reason-custom {
+    background-color: white;
+    color: black;
+}
+
+.reason-custom-button {
+    padding: 10px;
+    border: none;
+    margin: 0px;
+}
+
+.no-button {
+    background-color: teal;
+}
+
+.yes-button {
+    background-color: #5cd65c;
+}
+
+.maybe-button {
+    background-color: silver;
+}
+
+
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
