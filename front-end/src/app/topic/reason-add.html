@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Add a reason</h1>
+  <form name="add-reason" ng-submit="topic.addReason()">
+    <div class="row">
+      <label for="reason">Reason</label>
+      <input ng-model="topic.reason" type="text" id="reason" placeholder="e.g. 'The 2nd amendment says so'" class="col-md-12" value="The 2nd amendment says so" />
+    </div>
+    <button type="submit" class="btn btn-default">Submit Reason</button>
+</div>

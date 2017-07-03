@@ -4,7 +4,7 @@
 
   <div class="container">
     <div class="topic-label col-md-3">TOPIC:</div>
-    <div class="topic-container col-md-9">Should all U.S. citizens be allowed to own a firearm? {{topicController.topic.question}}</div>
+    <div class="topic-container col-md-9">{{main.data.question}}</div>
   </div>
 
   <h3></h3>
@@ -12,17 +12,9 @@
     <div class="col-md-6 side">
       <h4 class="no">NO</h4>
       <div class="reasons-container">
-        <div class="row reason">
-          <div class="reason-name col-md-9">Too many mass shootings</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
+        <div class="row reason" ng-repeat="reason in main.data.no">
+          <div class="reason-name col-md-9">{{reason.text}}</div>
+          <div class="count col-md-3">{{reason.count}}</div>
         </div>
         <div class="row reason">
           <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
@@ -33,17 +25,9 @@
     <div class="col-md-6 side">
       <h4 class="yes">YES</h4>
       <div class="reasons-container">
-        <div class="row reason">
-          <div class="reason-name col-md-9">2nd Amendment</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
+        <div class="row reason" ng-repeat="reason in main.data.yes">
+          <div class="reason-name col-md-9">{{reason.text}}</div>
+          <div class="count col-md-3">{{reason.count}}</div>
         </div>
         <div class="row reason">
           <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
@@ -56,17 +40,9 @@
     <div class="col-md-offset-3 col-md-6 side">
       <h4 class="maybe">MAYBE</h4>
       <div class="reasons-container">
-        <div class="row reason">
-          <div class="reason-name col-md-9">I can see both sides</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
-        </div>
-        <div class="row reason">
-          <div class="reason-name col-md-9">...</div>
-          <div class="count col-md-3">234</div>
+        <div class="row reason" ng-repeat="reason in main.data.maybe">
+          <div class="reason-name col-md-9">{{reason.text}}</div>
+          <div class="count col-md-3">{{reason.count}}</div>
         </div>
         <div class="row reason">
           <input type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />

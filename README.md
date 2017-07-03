@@ -1,2 +1,4 @@
 # MyStance
-Simple tool to share your stance and see those of others.
+## The world's opinions in three boxes.
+
+Follow along with development on [my Medium.](http://medium.com/@connergillette)

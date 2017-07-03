@@ -15,6 +15,13 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			controllerAs: 'topic'
 		})
 
+		.state('reason-add', {
+			url: '/topic/:id/:side/reason/add',
+			templateUrl: 'app/topic/reason-add.html',
+			controller: 'TopicController',
+			controllerAs: 'topic'
+		})
+
 		.state('topic', {
 			url: '/topic/:id',
 			templateUrl: 'app/topic/topic.html',

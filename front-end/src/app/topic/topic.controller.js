@@ -11,7 +11,6 @@ export class TopicController {
 		this.$http.post("http://localhost:4000/topic/add", {
 			topic: this.topic
 		});
-		alert("Success!");
 	}
 
 	getTopic(params) {
@@ -22,6 +21,13 @@ export class TopicController {
 				alert("Invalid topic id.");
 			}
 			vm.data = topic.data;
+		});
+	}
+
+	addReason() {
+		this.$http.post("http://localhost:4000/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
+			reason: this.reason,
+			side: this.params.side
 		});
 	}
 }

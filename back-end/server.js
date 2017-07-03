@@ -15,9 +15,15 @@ server.get('/topic/:id', function(req, res, next) {
 	next();
 }, topic.get);
 
+// server.get('/topic/featured', topic.featured);
+
 server.post('/topic/add', topic.post);
 
-// server.post('/topic/:id/reason/add', reason.post);
+server.post('/topic/:id/:side/reason/add', function(req, res, next) {
+	res.id = req.params.id;
+	res.side = req.params.side;
+	next();
+}, topic.addReason);
 
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 	if (!err) {
