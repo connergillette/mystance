@@ -56,8 +56,9 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 
 .side {
     background-color: whitesmoke;
-    margin-top: 25px;
+    margin-top: 65px;
     padding: 0px;
+    max-height: 260px;
 }
 
 .side > h4 {
@@ -82,6 +83,7 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 
 .reasons-container {
     height: 200px;
+    overflow-y: scroll;
 }
 
 .reason {
@@ -125,10 +127,66 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 }
 
 .maybe-button {
-    background-color: silver;
+    background-color: darkgray;
 }
 
+// CUSTOM SCROLLBAR
+// ::-webkit-scrollbar {
+//     width: 5px;
+//     padding-left: 100px;
+// }
+// ::-webkit-scrollbar-button {
+//     display: none;
+// }
+// ::-webkit-scrollbar-track {
+//     background-color: transparent;
+// }
+// ::-webkit-scrollbar-track-piece {}
+// ::-webkit-scrollbar-thumb {
+//     border-radius: 2px;
+//     background-color: white;
+@mixin scrollbars() {
+    ::-webkit-scrollbar {
+        width:  .5em;
+        height: .5em;
+    }
 
+    ::-webkit-scrollbar-thumb {
+        background: gray;
+    }
+
+    #no-reasons::-webkit-scrollbar-track {
+        background: teal;
+    }
+
+    // For Internet Explorer
+    #no-reasons {
+      scrollbar-face-color: teal;
+      scrollbar-track-color: teal;
+    }
+
+      #yes-reasons::-webkit-scrollbar-track {
+          background: #5cd65c;
+      }
+
+      // For Internet Explorer
+      #yes-reasons {
+        scrollbar-face-color: #5cd65c;
+        scrollbar-track-color: #5cd65c;
+      }
+
+      #maybe-reasons::-webkit-scrollbar-track {
+          background: darkgray;
+      }
+
+      // For Internet Explorer
+      #maybe-reasons {
+        scrollbar-face-color: darkgray;
+        scrollbar-track-color: darkgray;
+      }
+}
+
+@include scrollbars();
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

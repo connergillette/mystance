@@ -3,10 +3,12 @@ export class MainController {
 		'ngInject';
 		this.$http = $http;
 
+		// Get Topic data to display on page load
 		this.getTopic();
 	}
 
-	getTopic(params) {
+	// Get featured Topic data
+	getTopic() {
 		var vm = this;
 
 		this.$http.get("http://localhost:4000/topic/featured").then(function(topic) {
@@ -16,5 +18,37 @@ export class MainController {
 			vm.data = topic.data;
 			console.log(topic);
 		});
+	}
+
+	// Add a reason to a particular Side of the displayed Topic
+	addReason(side) {
+		var vm = this;
+		if (side == 'no') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+				reason: this.no,
+				side: side
+			}).then(function() {
+				vm.getTopic();
+				document.getElementById("no-input").value = "";
+			});
+		} else if (side == 'yes') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+				reason: this.yes,
+				side: side
+			}).then(function() {
+				vm.getTopic();
+				document.getElementById("yes-input").value = "";
+			});
+		} else if (side == 'maybe') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+				reason: this.maybe,
+				side: side
+			}).then(function() {
+				vm.getTopic();
+				document.getElementById("maybe-input").value = "";
+			});
+		} else {
+			alert("Sorry - we received an invalid request. Please try again.");
+		}
 	}
 }

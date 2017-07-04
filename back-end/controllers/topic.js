@@ -3,8 +3,12 @@ var Reason = require('../models/reason');
 var mongoose = require('mongoose');
 
 module.exports = {
+	// GET /topic/<UID> or /topic/featured
+	// Retrieve specific Topic or the most recent one (using ID 'featured')
 	get: function(req, res) {
+		// Checks if ID provided is 'featured' or specific Topic UID
 		if (req.params.id != "featured") {
+			// Find specific Topic matching provided ID
 			Topic.findOne({
 				_id: req.params.id
 			}).exec(function(err, result) {
@@ -17,6 +21,7 @@ module.exports = {
 				}
 			});
 		} else {
+			// Find first Topic instance in database
 			Topic.findOne({}).populate("no yes maybe").exec(function(err, result) {
 				if (err) {
 					res.status(404);
@@ -28,7 +33,10 @@ module.exports = {
 			})
 		}
 	},
+	// POST /topic/add
+	// Add new Topic
 	post: function(req, res) {
+		// Create and save new Topic based on provided details
 		var topic = new Topic();
 		topic.question = req.body.topic.question;
 		topic.save();
@@ -38,8 +46,11 @@ module.exports = {
 		res.send();
 		res.status(200);
 	},
+	// POST /topic/<UID>/<Side>/reason/add
+	// Add new Reason under a certain Topic's Side
 	addReason: function(req, res) {
-		let topic = new Topic();
+		var topic = new Topic();
+		// Find provided Topic to add new Reason to
 		Topic.findOne({
 			_id: req.params.id
 		}).exec(function(err, result) {
@@ -49,7 +60,9 @@ module.exports = {
 			}
 			topic = result;
 
+			// Ensure client provided valid Side value
 			if (req.params.side == 'no' || req.params.side == 'yes' || req.params.side == 'maybe') {
+				// Create and save new Reason within Topic's Side
 				var reason = new Reason();
 				reason.text = req.body.reason;
 				reason.count = 1;
@@ -57,6 +70,7 @@ module.exports = {
 
 				reason.save();
 
+				// Decides which Topic field to update based on Reason's side
 				if (req.params.side == 'no') {
 					var newReasons = topic.no;
 					newReasons.push(reason);
@@ -72,6 +86,8 @@ module.exports = {
 				}
 
 				console.log("NEW TOPIC: " + topic);
+
+				// Update Topic with new Reason added
 				Topic.findByIdAndUpdate(topic._id, {
 					yes: topic.yes,
 					no: topic.no,
