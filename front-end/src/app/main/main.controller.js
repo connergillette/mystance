@@ -51,4 +51,11 @@ export class MainController {
 			alert("Sorry - we received an invalid request. Please try again.");
 		}
 	}
+
+	addVote(reason) {
+		// Searches page for counter element that was clicked based on the reason text
+		var selector = document.evaluate("//div[text()='" + reason + "']", document, null, XPathResult.ANY_TYPE, null);
+		var target = selector.iterateNext().parentNode.querySelector(".count");
+		target.innerHTML++;
+	}
 }
