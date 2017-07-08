@@ -14,7 +14,7 @@
       <div class="reasons-container" id="no-reasons">
         <div class="row reason" ng-repeat="reason in main.data.no">
           <div class="reason-name col-md-9">{{reason.text}}</div>
-          <div class="count col-md-3" ng-click="main.addVote(reason.text)">{{reason.count}}</div>
+          <div class="count col-md-3" ng-click="main.addVote(reason)">{{reason.count}}</div>
         </div>
       </div>
       <div class="row reason">
@@ -29,7 +29,7 @@
       <div class="reasons-container" id="yes-reasons">
         <div class="row reason" ng-repeat="reason in main.data.yes">
           <div class="reason-name col-md-9">{{reason.text}}</div>
-          <div class="count col-md-3" ng-click="main.addVote(reason.text)">{{reason.count}}</div>
+          <div class="count col-md-3" ng-click="main.addVote(reason)">{{reason.count}}</div>
         </div>
       </div>
       <div class="row reason">
@@ -46,7 +46,7 @@
       <div class="reasons-container" id="maybe-reasons">
         <div class="row reason" ng-repeat="reason in main.data.maybe">
           <div class="reason-name col-md-9">{{reason.text}}</div>
-          <div class="count col-md-3" ng-click="main.addVote(reason.text)">{{reason.count}}</div>
+          <div class="count col-md-3" ng-click="main.addVote(reason)">{{reason.count}}</div>
         </div>
       </div>
       <div class="row reason">

@@ -26,7 +26,16 @@ module.exports = {
 				if (err) {
 					res.status(404);
 					res.send("No Topic found.");
-				} else {
+				} else { // If result exists, sort Reason arrays and return
+					result.no.sort(function(a, b) {
+						return b.count - a.count;
+					});
+					result.yes.sort(function(a, b) {
+						return b.count - a.count;
+					});
+					result.maybe.sort(function(a, b) {
+						return b.count - a.count;
+					});
 					res.status(200);
 					res.send(result);
 				}
@@ -60,48 +69,68 @@ module.exports = {
 			}
 			topic = result;
 
-			// Ensure client provided valid Side value
-			if (req.params.side == 'no' || req.params.side == 'yes' || req.params.side == 'maybe') {
-				// Create and save new Reason within Topic's Side
-				var reason = new Reason();
-				reason.text = req.body.reason;
-				reason.count = 1;
-				reason.side = req.params.side;
+			// Check if Reason already exists
+			// If it does, iterate count (add a vote)
+			// If it doesn't, create it with a count of 1
+			Reason.findOne({
+				text: req.body.reason
+			}).exec(function(err, reason) {
+				if (reason) {
+					var newCount = reason.count + 1;
+					Reason.findByIdAndUpdate(reason._id, { // Update count in Reason
+						count: newCount
+					}, function(err, newReason) {
+						Topic.findByIdAndUpdate(topic._id, { // Update Topic / Reason
+							no: topic.no,
+							yes: topic.yes,
+							maybe: topic.maybe
+						}, function(err, newTopic) {
+							res.send(newTopic);
+						});
+					});
+				} else {
+					// Ensure client provided valid Side value
+					if (req.params.side == 'no' || req.params.side == 'yes' || req.params.side == 'maybe') {
+						// Create and save new Reason within Topic's Side
+						var reason = new Reason();
+						reason.text = req.body.reason;
+						reason.count = 1;
+						reason.side = req.params.side;
 
-				reason.save();
+						reason.save();
 
-				// Decides which Topic field to update based on Reason's side
-				if (req.params.side == 'no') {
-					var newReasons = topic.no;
-					newReasons.push(reason);
-					topic.no = newReasons;
-				} else if (req.params.side == 'yes') {
-					var newReasons = topic.yes;
-					newReasons.push(reason);
-					topic.yes = newReasons;
-				} else if (req.params.side == 'maybe') {
-					var newReasons = topic.maybe;
-					newReasons.push(reason);
-					topic.maybe = newReasons;
+						// Decides which Topic field to update based on Reason's side
+						if (req.params.side == 'no') {
+							var newReasons = topic.no;
+							newReasons.push(reason);
+							topic.no = newReasons;
+						} else if (req.params.side == 'yes') {
+							var newReasons = topic.yes;
+							newReasons.push(reason);
+							topic.yes = newReasons;
+						} else if (req.params.side == 'maybe') {
+							var newReasons = topic.maybe;
+							newReasons.push(reason);
+							topic.maybe = newReasons;
+						}
+
+						// Update Topic with new Reason added
+						Topic.findByIdAndUpdate(topic._id, {
+							yes: topic.yes,
+							no: topic.no,
+							maybe: topic.maybe
+						}, function(err, topic) {
+							console.log("Reason \"" + reason.text + "\" submitted. ID: " + reason._id);
+
+							res.send(reason);
+							res.status(200);
+						});
+					} else {
+						res.status(400);
+						res.send("Invalid side.");
+					}
 				}
-
-				console.log("NEW TOPIC: " + topic);
-
-				// Update Topic with new Reason added
-				Topic.findByIdAndUpdate(topic._id, {
-					yes: topic.yes,
-					no: topic.no,
-					maybe: topic.maybe
-				}, function(err, topic) {
-					console.log("Reason \"" + reason.text + "\" submitted. ID: " + reason._id);
-
-					res.send(reason);
-					res.status(200);
-				});
-			} else {
-				res.status(400);
-				res.send("Invalid side.");
-			}
+			});
 		});
 	}
 }

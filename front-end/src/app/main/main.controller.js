@@ -16,7 +16,7 @@ export class MainController {
 				alert("Invalid topic id.");
 			}
 			vm.data = topic.data;
-			console.log(topic);
+			// console.log(topic);
 		});
 	}
 
@@ -54,8 +54,36 @@ export class MainController {
 
 	addVote(reason) {
 		// Searches page for counter element that was clicked based on the reason text
-		var selector = document.evaluate("//div[text()='" + reason + "']", document, null, XPathResult.ANY_TYPE, null);
-		var target = selector.iterateNext().parentNode.querySelector(".count");
-		target.innerHTML++;
+		// var selector = document.evaluate("//div[text()='" + reason + "']", document, null, XPathResult.ANY_TYPE, null);
+		// var target = selector.iterateNext().parentNode.querySelector(".count");
+		// target.innerHTML++;
+
+		// console.log(reason.side);
+
+		var vm = this;
+		if (reason.side == 'no') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				reason: reason.text,
+				side: reason.side
+			}).then(function() {
+				vm.getTopic();
+			});
+		} else if (reason.side == 'yes') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				reason: reason.text,
+				side: reason.side
+			}).then(function() {
+				vm.getTopic();
+			});
+		} else if (reason.side == 'maybe') {
+			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				reason: reason.text,
+				side: reason.side
+			}).then(function() {
+				vm.getTopic();
+			});
+		} else {
+			alert("Sorry - we received an invalid request. Please try again.");
+		}
 	}
 }
