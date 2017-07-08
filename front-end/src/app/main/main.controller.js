@@ -1,10 +1,29 @@
 export class MainController {
-	constructor($http) {
+	constructor($http, $auth) {
 		'ngInject';
 		this.$http = $http;
+		this.$auth = $auth;
 
+		this.handleUser();
 		// Get Topic data to display on page load
 		this.getTopic();
+	}
+
+	handleUser() {
+		var vm = this;
+		if (!vm.$auth.getToken()) {
+			this.$http.get("http://localhost:4000/user/add").then(function(token) {
+				console.log(token.data);
+				vm.$auth.setToken(token.data);
+			});
+		} else {
+			this.$http.post("http://localhost:4000/user/login", {
+				token: vm.$auth.getToken()
+			}).then(function(user) {
+				console.log(user);
+				vm.user = user.data;
+			});
+		}
 	}
 
 	// Get featured Topic data

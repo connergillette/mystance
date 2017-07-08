@@ -5,6 +5,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 var topic = require('./controllers/topic');
+var auth = require('./controllers/auth');
 var cors = require('./services/cors');
 
 server.use(cors);
@@ -22,6 +23,10 @@ server.post('/topic/:id/:side/reason/add', function(req, res, next) {
 	res.side = req.params.side;
 	next();
 }, topic.addReason);
+
+server.get('/user/add', auth.add);
+
+server.post('/user/login', auth.login);
 
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 	if (!err) {
