@@ -3,6 +3,7 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 
 var User = require('../models/user');
+var Vote = require('../models/vote');
 
 module.exports = {
 	add: function(req, res) {

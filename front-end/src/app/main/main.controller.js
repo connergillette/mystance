@@ -20,7 +20,7 @@ export class MainController {
 			this.$http.post("http://localhost:4000/user/login", {
 				token: vm.$auth.getToken()
 			}).then(function(user) {
-				console.log(user);
+				// console.log(user);
 				vm.user = user.data;
 			});
 		}
@@ -72,13 +72,6 @@ export class MainController {
 	}
 
 	addVote(reason) {
-		// Searches page for counter element that was clicked based on the reason text
-		// var selector = document.evaluate("//div[text()='" + reason + "']", document, null, XPathResult.ANY_TYPE, null);
-		// var target = selector.iterateNext().parentNode.querySelector(".count");
-		// target.innerHTML++;
-
-		// console.log(reason.side);
-
 		var vm = this;
 		if (reason.side == 'no') {
 			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
