@@ -21,12 +21,12 @@ module.exports = {
 	login: function(req, res) {
 		// console.log(req.body.token);
 		var target_id = jwt.decode(req.body.token, 'secret'); // TODO: Secure secret for token encoding
-		console.log(target_id.sub);
+		// console.log(target_id.sub);
 		if (target_id.sub) {
 			User.findOne({
 				_id: target_id.sub
 			}).populate('responses').exec(function(err, user) {
-				console.log("USER: " + user + ", ERROR: " + err);
+				// console.log("USER: " + user + ", ERROR: " + err);
 				res.send(user);
 			})
 		}

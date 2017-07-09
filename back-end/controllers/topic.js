@@ -1,6 +1,10 @@
 var Topic = require('../models/topic');
 var Reason = require('../models/reason');
+var Vote = require('../models/vote');
+var User = require('../models/user');
+
 var mongoose = require('mongoose');
+var async = require('async');
 
 module.exports = {
 	// GET /topic/<UID> or /topic/featured
@@ -85,10 +89,17 @@ module.exports = {
 							yes: topic.yes,
 							maybe: topic.maybe
 						}, function(err, newTopic) {
-							res.send(newTopic);
+							if (err) {
+								res.status(400);
+								res.send();
+							} else {
+								// console.log(req.body);
+								changeUserVote(newTopic, newReason, req.body.user);
+								res.send(newTopic);
+							}
 						});
 					});
-				} else {
+				} else { // If the Reason doesn't already exist...
 					// Ensure client provided valid Side value
 					if (req.params.side == 'no' || req.params.side == 'yes' || req.params.side == 'maybe') {
 						// Create and save new Reason within Topic's Side
@@ -121,7 +132,7 @@ module.exports = {
 							maybe: topic.maybe
 						}, function(err, topic) {
 							console.log("Reason \"" + reason.text + "\" submitted. ID: " + reason._id);
-
+							changeUserVote(topic, reason, req.body.user);
 							res.send(reason);
 							res.status(200);
 						});
@@ -133,4 +144,71 @@ module.exports = {
 			});
 		});
 	}
+}
+
+function changeUserVote(topic, reason, user_id) {
+	// console.log(topic);
+	// console.log(reason);
+	console.log(user_id);
+
+	var vote = new Vote();
+	vote.topic = topic;
+	vote.reason = reason;
+	vote.side = reason.side;
+
+	// console.log("ATTEMPTING TO CHANGE VOTE: " + user_id);
+	User.findOne({
+		_id: user_id
+	}).populate("responses").exec(function(err, user) {
+		if (user.responses.indexOf(topic._id) == -1) {
+			console.log("Vote added.");
+			vote.save();
+			var newUser = user;
+			newUser.responses.push(vote);
+			console.log(newUser.responses);
+			User.findByIdAndUpdate(newUser._id, {
+				responses: newUser.responses
+			}, function(err, updated) {
+				console.log("UPDATED: " + updated);
+			});
+			console.log("User should have been updated. Check mongodb shell.");
+		} else {
+			for (var i = 0; i < user.responses.length(); i++) {
+				// console.log(user.responses[i]);
+				Vote.findOne({
+					_id: user.responses[i]
+				}).populate('topic reason').exec(function(err, currentVote) {
+					// if (err) {
+					// 	res.status(400);
+					// 	res.send("Something went wrong.");
+					// }
+					if (currentVote.topic._id == topic._id) { // Find vote that points to the same topic
+						// Update Topic with resulting changes
+						Topic.findOne({
+							_id: topic._id
+						}).exec(function(err, target) {
+							// if (err) { // TODO: Make separate function
+							// 	res.status(400);
+							// 	res.send("Something went wrong.")
+							// } else {
+							if (currentVote.side == vote.side) {
+								if (currentVote.reason.side == 'no') {
+									target.no[target.no.indexOf(currentVote)] = vote;
+									target.no[target.no.indexOf(currentVote)].count--;
+								} else if (currentVote.reason.side == 'yes') {
+									target.yes[target.yes.indexOf(currentVote)] = vote;
+									target.no[target.no.indexOf(currentVote)].count--;
+								} else if (currentVote.reason.side == 'maybe') {
+									target.maybe[target.maybe.indexOf(currentVote)] = vote;
+									target.no[target.no.indexOf(currentVote)].count--;
+								}
+								currentVote = vote; // Update user vote
+							}
+							// }
+						});
+					}
+				});
+			}
+		}
+	});
 }

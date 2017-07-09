@@ -28,7 +28,7 @@ server.get('/user/add', auth.add);
 
 server.post('/user/login', auth.login);
 
-mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
+mongoose.connect("mongodb://localhost:27017/mystance-db", function(err, db) {
 	if (!err) {
 		console.log("Connected to Mongo");
 	}

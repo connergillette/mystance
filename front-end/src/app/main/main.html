@@ -14,11 +14,11 @@
       <div class="reasons-container" id="no-reasons">
         <div class="row reason" ng-repeat="reason in main.data.no">
           <div class="reason-name col-md-9">{{reason.text}}</div>
-          <div class="count col-md-3" ng-click="main.addVote(reason)">{{reason.count}}</div>
+          <div class="count col-md-3" ng-click="main.addVote(reason, main.user)">{{reason.count}}</div>
         </div>
       </div>
       <div class="row reason">
-        <form name="add-reason" ng-submit="main.addReason('no')">
+        <form name="add-reason" ng-submit="main.addReason('no', main.user)">
           <input id="no-input" type="text" ng-model="main.no" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
           <button class="reason-custom-button col-md-3 no-button">Add</button>
         </form>
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="row reason">
-        <form name="add-reason" ng-submit="main.addReason('yes')">
+        <form name="add-reason" ng-submit="main.addReason('yes', main.user)">
           <input id="yes-input" ng-model="main.yes" type="text" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
           <button class="reason-custom-button col-md-3 yes-button">Add</button>
         </form>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="row reason">
-        <form name="add-reason" ng-submit="main.addReason('maybe')">
+        <form name="add-reason" ng-submit="main.addReason('maybe', main.user)">
           <input id="maybe-input" type="text" ng-model="main.maybe" class="reason-name reason-custom col-md-9" placeholder="What's your reason?" />
           <button class="reason-custom-button col-md-3 maybe-button">Add</button>
         </form>
