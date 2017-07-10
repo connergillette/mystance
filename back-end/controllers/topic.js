@@ -94,7 +94,7 @@ module.exports = {
 								res.send();
 							} else {
 								// console.log(req.body);
-								changeUserVote(newTopic, newReason, req.body.user);
+								// changeUserVote(newTopic, newReason, req.body.user);
 								res.send(newTopic);
 							}
 						});
@@ -132,7 +132,7 @@ module.exports = {
 							maybe: topic.maybe
 						}, function(err, topic) {
 							console.log("Reason \"" + reason.text + "\" submitted. ID: " + reason._id);
-							changeUserVote(topic, reason, req.body.user);
+							// changeUserVote(topic, reason, req.body.user);
 							res.send(reason);
 							res.status(200);
 						});
