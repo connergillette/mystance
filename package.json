@@ -4,11 +4,8 @@
   "description": "The world's opinions in three boxes.",
   "main": "/back-end/server.js",
   "scripts": {
-   "dev": "node server.js",
-   "build": "next build",
-   "postinstall": "npm run build",
-   "start": "NODE_ENV=production node server.js"
- },
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/connergillette/mystance.git"
