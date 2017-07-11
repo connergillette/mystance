@@ -1,7 +1,7 @@
-var Topic = require('../models/Topic');
-var Reason = require('../models/Reason');
-var Vote = require('../models/Vote');
-var User = require('../models/User');
+var Topic = require('../models/Topic.js');
+var Reason = require('../models/Reason.js');
+var Vote = require('../models/Vote.js');
+var User = require('../models/User.js');
 
 var mongoose = require('mongoose');
 var async = require('async');
