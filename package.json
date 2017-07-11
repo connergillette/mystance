@@ -5,7 +5,9 @@
   "main": "/back-end/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp default"
+    "ng": "ng",
+    "build": "ng build",
+    "postinstall": "ng build"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,16 @@
     "node": "6.10.3"
   },
   "dependencies": {
+    "@angular/cli": "1.0.2",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
     "async": "^2.5.0",
     "babel-core": "~6.7.4",
     "babel-loader": "~6.2.4",
