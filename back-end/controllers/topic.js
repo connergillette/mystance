@@ -1,4 +1,4 @@
-var Topic = require('back-end/models/topic');
+var Topic = require('../models/topic');
 var Reason = require('../models/Reason.js');
 var Vote = require('../models/Vote.js');
 var User = require('../models/User.js');
