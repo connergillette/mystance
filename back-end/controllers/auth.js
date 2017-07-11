@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 
-var User = require('../models/user');
-var Vote = require('../models/vote');
+var User = require('../models/User');
+var Vote = require('../models/Vote');
 
 module.exports = {
 	add: function(req, res) {
