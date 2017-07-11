@@ -34,6 +34,6 @@ mongoose.connect("mongodb://localhost:27017/mystance-db", function(err, db) {
 	}
 })
 
-server.listen(6000, function() {
+server.listen(process.env.PORT || 6000, function() {
 	console.log("Server listening on port 4000");
 });
