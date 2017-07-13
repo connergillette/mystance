@@ -3,6 +3,7 @@ export class MainController {
 		'ngInject';
 		this.$http = $http;
 		this.$auth = $auth;
+		this.user = this.handleUser();
 
 		this.handleUser();
 		// Get Topic data to display on page load
@@ -11,7 +12,6 @@ export class MainController {
 
 	handleUser() {
 		var vm = this;
-		var currentUser;
 		if (!vm.$auth.getToken()) {
 			this.$http.get("http://localhost:4000/user/add").then(function(token) {
 				console.log(token.data);
@@ -22,9 +22,12 @@ export class MainController {
 				token: vm.$auth.getToken()
 			}).then(function(user) {
 				// console.log("THIS SHOULD BE AN ID (handleUser()): " + user.data._id);
-				vm.user = user.data;
-				currentUser = user.data._id;
-				return currentUser;
+				if (user.data == "") {
+					vm.$auth.removeToken();
+					vm.handleUser();
+				} else {
+					vm.user = user.data;
+				}
 			});
 		}
 	}
@@ -81,32 +84,34 @@ export class MainController {
 
 	addVote(reason, user) {
 		var vm = this;
-		if (reason.side == 'no') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else if (reason.side == 'yes') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else if (reason.side == 'maybe') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else {
-			alert("Sorry - we received an invalid request. Please try again.");
-		}
+		var user = this.handleUser();
+		console.log(user);
+		// if (reason.side == 'no') {
+		// 	this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+		// 		reason: reason.text,
+		// 		side: reason.side,
+		// 		user: vm.user._id
+		// 	}).then(function() {
+		// 		vm.getTopic();
+		// 	});
+		// } else if (reason.side == 'yes') {
+		// 	this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+		// 		reason: reason.text,
+		// 		side: reason.side,
+		// 		user: vm.user._id
+		// 	}).then(function() {
+		// 		vm.getTopic();
+		// 	});
+		// } else if (reason.side == 'maybe') {
+		// 	this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+		// 		reason: reason.text,
+		// 		side: reason.side,
+		// 		user: vm.user._id
+		// 	}).then(function() {
+		// 		vm.getTopic();
+		// 	});
+		// } else {
+		// 	alert("Sorry - we received an invalid request. Please try again.");
+		// }
 	}
 }

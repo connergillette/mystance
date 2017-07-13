@@ -26,6 +26,7 @@ module.exports = {
 			User.findOne({
 				_id: target_id.sub
 			}).populate('responses').exec(function(err, user) {
+				//TODO Add error if user is not found for front-end to call add()
 				// console.log("USER: " + user + ", ERROR: " + err);
 				res.send(user);
 			})
