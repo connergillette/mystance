@@ -147,68 +147,82 @@ module.exports = {
 }
 
 function changeUserVote(topic, reason, user_id) {
-	// console.log(topic);
-	// console.log(reason);
-	console.log("USER ID: " + user_id);
-
-	var vote = new Vote();
-	vote.topic = topic;
-	vote.reason = reason;
-	vote.side = reason.side;
+	// console.log("USER ID: " + user_id);
 
 	// console.log("ATTEMPTING TO CHANGE VOTE: " + user_id);
 	User.findOne({
 		_id: user_id
 	}).populate("responses").exec(function(err, user) {
-		if (user.responses.indexOf(topic._id) == -1) {
-			console.log("Vote added.");
-			vote.save();
-			var newUser = user;
-			newUser.responses.push(vote);
-			console.log(newUser.responses);
-			User.findByIdAndUpdate(newUser._id, {
-				responses: newUser.responses
-			}, function(err, updated) {
-				console.log("UPDATED: " + updated);
-			});
-			console.log("User should have been updated. Check mongodb shell.");
-		} else {
-			for (var i = 0; i < user.responses.length(); i++) {
-				// console.log(user.responses[i]);
-				Vote.findOne({
-					_id: user.responses[i]
-				}).populate('topic reason').exec(function(err, currentVote) {
-					// if (err) {
-					// 	res.status(400);
-					// 	res.send("Something went wrong.");
-					// }
-					if (currentVote.topic._id == topic._id) { // Find vote that points to the same topic
-						// Update Topic with resulting changes
-						Topic.findOne({
-							_id: topic._id
-						}).exec(function(err, target) {
-							// if (err) { // TODO: Make separate function
-							// 	res.status(400);
-							// 	res.send("Something went wrong.")
-							// } else {
-							if (currentVote.side == vote.side) {
-								if (currentVote.reason.side == 'no') {
-									target.no[target.no.indexOf(currentVote)] = vote;
-									target.no[target.no.indexOf(currentVote)].count--;
-								} else if (currentVote.reason.side == 'yes') {
-									target.yes[target.yes.indexOf(currentVote)] = vote;
-									target.no[target.no.indexOf(currentVote)].count--;
-								} else if (currentVote.reason.side == 'maybe') {
-									target.maybe[target.maybe.indexOf(currentVote)] = vote;
-									target.no[target.no.indexOf(currentVote)].count--;
-								}
-								currentVote = vote; // Update user vote
-							}
-							// }
-						});
-					}
-				});
+		var newVote = true;
+		var voteIndex = -1;
+		for (var i = 0; i < user.responses.length; i++) {
+			console.log("TARGET: " + topic._id + ", CURRENT: " + user.responses[i].topic);
+			if (user.responses[i].topic.equals(topic._id)) {
+				console.log("Topic found!");
+				newVote = false;
+				voteIndex = i;
+				break;
 			}
 		}
+		if (newVote) {
+			var vote = new Vote();
+			vote.topic = topic;
+			vote.reason = reason;
+			vote.side = reason.side;
+
+			vote.save();
+			console.log("Vote added.");
+
+			var newUser = user;
+			newUser.responses.push(vote);
+			// console.log(newUser.responses);
+			User.findByIdAndUpdate(newUser._id, {
+				responses: newUser.responses
+			});
+		} else {
+			Vote.findOne({
+				_id: user.responses[voteIndex]
+			}).populate('topic reason').exec(function(err, currentVote) {
+
+			});
+		}
+		// else {
+		// 	for (var i = 0; i < user.responses.length(); i++) {
+		// 		console.log(user.responses[i]);
+		// 		Vote.findOne({
+		// 			_id: user.responses[i]
+		// 		}).populate('topic reason').exec(function(err, currentVote) {
+		// 			// if (err) {
+		// 			// 	res.status(400);
+		// 			// 	res.send("Something went wrong.");
+		// 			// }
+		// 			if (currentVote.topic._id == topic._id) { // Find vote that points to the same topic
+		// 				// Update Topic with resulting changes
+		// 				Topic.findOne({
+		// 					_id: topic._id
+		// 				}).exec(function(err, target) {
+		// 					// if (err) { // TODO: Make separate function
+		// 					// 	res.status(400);
+		// 					// 	res.send("Something went wrong.")
+		// 					// } else {
+		// 					if (currentVote.side == vote.side) {
+		// 						if (currentVote.reason.side == 'no') {
+		// 							target.no[target.no.indexOf(currentVote)] = vote;
+		// 							target.no[target.no.indexOf(currentVote)].count--;
+		// 						} else if (currentVote.reason.side == 'yes') {
+		// 							target.yes[target.yes.indexOf(currentVote)] = vote;
+		// 							target.no[target.no.indexOf(currentVote)].count--;
+		// 						} else if (currentVote.reason.side == 'maybe') {
+		// 							target.maybe[target.maybe.indexOf(currentVote)] = vote;
+		// 							target.no[target.no.indexOf(currentVote)].count--;
+		// 						}
+		// 						currentVote = vote; // Update user vote
+		// 					}
+		// 					// }
+		// 				});
+		// 			}
+		// 		});
+		// 	}
+		// }
 	});
 }
