@@ -25,9 +25,8 @@ export class MainController {
 				if (user.data == "") {
 					vm.$auth.removeToken();
 					vm.handleUser();
-				} else {
-					vm.user = user.data;
 				}
+				vm.user = user.data;
 			});
 		}
 	}

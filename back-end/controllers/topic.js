@@ -152,7 +152,13 @@ function changeUserVote(topic, reason, user_id) {
 	// console.log("ATTEMPTING TO CHANGE VOTE: " + user_id);
 	User.findOne({
 		_id: user_id
-	}).populate("responses").exec(function(err, user) {
+	}).populate("responses").populate({
+		path: "responses",
+		populate: {
+			path: 'reason',
+			model: 'Reason'
+		}
+	}).exec(function(err, user) {
 		var newVote = true;
 		var voteIndex = -1;
 		for (var i = 0; i < user.responses.length; i++) {
@@ -164,26 +170,41 @@ function changeUserVote(topic, reason, user_id) {
 				break;
 			}
 		}
+		console.log("ADDING NEW VOTE? " + newVote);
+
+		var vote = new Vote();
+		vote.topic = topic;
+		vote.reason = reason;
+		vote.side = reason.side;
+
+		vote.save();
+
+		var newUser = user;
 		if (newVote) {
-			var vote = new Vote();
-			vote.topic = topic;
-			vote.reason = reason;
-			vote.side = reason.side;
-
-			vote.save();
-			console.log("Vote added.");
-
-			var newUser = user;
 			newUser.responses.push(vote);
-			// console.log(newUser.responses);
 			User.findByIdAndUpdate(newUser._id, {
 				responses: newUser.responses
+			}, function(err, updatedUser) {
+				console.log("User vote added.");
 			});
 		} else {
-			Vote.findOne({
-				_id: user.responses[voteIndex]
-			}).populate('topic reason').exec(function(err, currentVote) {
-
+			var oldVote = newUser.responses[voteIndex];
+			console.log(oldVote);
+			newUser.responses[voteIndex] = vote;
+			User.findByIdAndUpdate(newUser._id, {
+				responses: newUser.responses
+			}, {
+				new: true
+			}, function(err, updatedUser) {
+				var newCount = oldVote.reason.count - 1;
+				Reason.findByIdAndUpdate(oldVote.reason._id, {
+					count: newCount
+				}, {
+					new: true
+				}, function(err, newReason) {
+					console.log(newReason);
+				});
+				console.log("User vote updated.");
 			});
 		}
 		// else {

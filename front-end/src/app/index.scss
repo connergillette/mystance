@@ -29,13 +29,31 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 }
 
 // GENERAL
+body {
+    font-family: "Roboto Slab", serif;
+}
+
+.masthead {
+    color: white;
+    background-color: #a7c0cd;
+    padding-bottom: 25px;
+}
+
 .site-header {
     font-size: 50pt;
     padding-top: 25px;
+    padding-bottom: 0px;
 }
 
 .site-subheader {
-    // TODO
+    font-size: 25px;
+    margin-top: 0px;
+}
+
+.topic {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    // text-align: center;
 }
 
 .topic-label {
@@ -46,19 +64,21 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
     font-size: 20pt;
     text-align: center;
     font-weight: bold;
+    display: inline-block;
 }
 
 .topic-container {
-    font-size: 20pt;
+    font-size: 30pt;
     text-align: center;
-    background-color: silver;
+    background-color: white;
 }
 
 .side {
     background-color: whitesmoke;
-    margin-top: 65px;
+    margin-top: 15px;
     padding: 0px;
     max-height: 260px;
+    border-radius: 5px;
 }
 
 .side > h4 {
@@ -69,12 +89,20 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
     font-size: 30px;
 }
 
+.side-header {
+    border-radius: 5px 5px 0px 0px;
+}
+
 .no {
     background-color: teal;
 }
 
 .yes {
     background-color: #5cd65c;
+}
+
+.second-row {
+    margin-top: 40px;
 }
 
 .maybe {
@@ -129,6 +157,29 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 .maybe-button {
     background-color: darkgray;
 }
+
+// .red {
+//     background-color: red;
+//     min-height: 100%;
+//     min-width: 10px;
+//     position: absolute;
+// }
+//
+// .white {
+//     background-color: white;
+//     min-height: 100%;
+//     min-width: 10px;
+//     position: absolute;
+//     margin-left: 10px;
+// }
+//
+// .blue {
+//     background-color: blue;
+//     min-height: 100%;
+//     min-width: 10px;
+//     position: absolute;
+//     margin-left: 20px;
+// }
 
 // CUSTOM SCROLLBAR
 // ::-webkit-scrollbar {
