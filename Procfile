@@ -1,3 +1,3 @@
-web: node back-end/server.js
+web: node index.js
 :set fileformat=unix
 :w
