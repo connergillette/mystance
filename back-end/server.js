@@ -34,8 +34,8 @@ mongoose.connect("mongodb://localhost:27017/mystance-db", function(err, db) {
 	}
 })
 
-server.listen(process.env.PORT || 5000, function() {
+server.listen(process.env.PORT || 4000, function() {
 	// server.listen(4000, function() {
 	server.use(express.static(__dirname));
-	console.log("Server listening on port 5000");
+	console.log("Server listening on port 4000");
 });
