@@ -1,4 +1,4 @@
 web: node back-end/index.js
-web: gulp serve
+web: gulp build front-end/gulpfile.js
 :set fileformat=unix
 :w
