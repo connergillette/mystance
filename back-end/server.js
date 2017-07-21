@@ -28,7 +28,7 @@ server.get('/user/add', auth.add);
 
 server.post('/user/login', auth.login);
 
-mongoose.connect("mongodb://localhost:27017/mystance-db", function(err, db) {
+mongoose.connect("mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
 	if (!err) {
 		console.log("Connected to Mongo");
 	}
