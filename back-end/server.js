@@ -27,8 +27,9 @@ server.post('/topic/:id/:side/reason/add', function(req, res, next) {
 server.get('/user/add', auth.add);
 
 server.post('/user/login', auth.login);
-
 mongoose.connect("mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
+	// mongoose.connect("mongodb://127.0.0.1:27017", function(err, db) {
+
 	if (!err) {
 		console.log("Connected to Mongo");
 	}
@@ -36,6 +37,6 @@ mongoose.connect("mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15
 
 server.listen(process.env.PORT || 4000, function() {
 	// server.listen(4000, function() {
-	server.use(express.static(__dirname));
+	// server.use(express.static(__dirname));
 	console.log("Server listening on port 4000");
 });
