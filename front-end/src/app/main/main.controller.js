@@ -79,38 +79,21 @@ export class MainController {
 		} else {
 			alert("Sorry - we received an invalid request. Please try again.");
 		}
+		this.getTopic();
 	}
 
 	addVote(reason, user) {
 		var vm = this;
 		var user = this.handleUser();
-		// console.log(user);
-		if (reason.side == 'no') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: vm.user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else if (reason.side == 'yes') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: vm.user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else if (reason.side == 'maybe') {
-			this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
-				reason: reason.text,
-				side: reason.side,
-				user: vm.user._id
-			}).then(function() {
-				vm.getTopic();
-			});
-		} else {
-			alert("Sorry - we received an invalid request. Please try again.");
-		}
+
+		this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+			reason: reason.text,
+			side: reason.side,
+			user: vm.user._id
+		}).then(function() {
+			vm.getTopic();
+		});
+
+		// TODO: Handle error
 	}
 }
