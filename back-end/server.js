@@ -27,7 +27,7 @@ server.post('/topic/:id/:side/reason/add', function(req, res, next) {
 server.get('/user/add', auth.add);
 
 server.post('/user/login', auth.login);
-mongoose.connect("mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
 	// mongoose.connect("mongodb://127.0.0.1:27017", function(err, db) {
 
 	if (!err) {
