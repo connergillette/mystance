@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var Topic = require('../models/Topic.js');
+=======
+var Topic = require('./back-end/models/topic');
+>>>>>>> 5294a557db0ce70789bae045c5dfbb27a25ee3b8
 var Reason = require('../models/Reason.js');
 var Vote = require('../models/Vote.js');
 var User = require('../models/User.js');
