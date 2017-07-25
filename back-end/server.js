@@ -11,6 +11,10 @@ var cors = require('./services/cors');
 server.use(cors);
 server.use(bodyParser.json());
 
+server.get('/', function() {
+	res.send("Hello world!");
+})
+
 server.get('/topic/:id', function(req, res, next) {
 	res.id = req.params.id;
 	next();
