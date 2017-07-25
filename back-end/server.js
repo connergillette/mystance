@@ -28,7 +28,7 @@ server.get('/user/add', auth.add);
 
 server.post('/user/login', auth.login);
 // process.env.MONGOLAB_URI ||
-mongoose.connect("mongodb://heroku_1d5zllb6:heroku_1d5zllb6@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
+mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
 	// mongoose.connect("mongodb://127.0.0.1:27017", function(err, db) {
 
 	if (!err) {
