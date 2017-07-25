@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "ng": "ng",
     "build": "ng build",
-    "postinstall": "cd front-end && bower install && ng build --prod"
+    "postinstall": "ng build --prod && cd front-end && bower install"
   },
   "repository": {
     "type": "git",
