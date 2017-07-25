@@ -40,7 +40,7 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 
 server.listen(process.env.PORT || 4000, function() {
 	server.use(express.static(__dirname));
-	console.log("Server listening on port 4000");
+	console.log("Server listening on port " + process.env.PORT);
 });
 
 // server.listen(4000, function() {
