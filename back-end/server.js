@@ -12,7 +12,7 @@ server.use(cors);
 server.use(bodyParser.json());
 
 server.get('/', function(req, res) {
-	res.sendFile("/.tmp/serve/index.html");
+	res.sendFile(__dirname + "../.tmp/serve/index.html");
 })
 
 server.get('/topic/:id', function(req, res, next) {
