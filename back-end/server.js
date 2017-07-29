@@ -1,3 +1,4 @@
+var gzippo = require("gzippo");
 var express = require("express");
 var server = express();
 var bodyParser = require('body-parser');
@@ -45,8 +46,11 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 	}
 })
 
+server.use(express.static(__dirname));
+server.use(express.logger('dev'));
+server.use(gzippo.staticGzip("" + _dirname + "/dist"));
+
 server.listen(process.env.PORT || 4000, function() {
-	server.use(express.static(__dirname));
 	console.log("Server listening on port " + process.env.PORT);
 });
 
