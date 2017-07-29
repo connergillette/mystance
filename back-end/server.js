@@ -50,7 +50,7 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 server.listen(process.env.PORT || 4000, function() {
 	server.use(express.static(__dirname));
 	server.use(express.logger('dev'));
-	server.use(gzippo.staticGzip("" + _dirname + "/dist"));
+	// server.use(gzippo.staticGzip("" + _dirname + "/dist"));
 	console.log("Server listening on port " + process.env.PORT);
 });
 
