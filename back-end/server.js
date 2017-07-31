@@ -1,3 +1,4 @@
+// Modules
 var gzippo = require("gzippo");
 var express = require("express");
 var server = express();
@@ -5,10 +6,12 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+// Controllers and Services
 var topic = require('./controllers/topic');
 var auth = require('./controllers/auth');
 var cors = require('./services/cors');
 
+// Middleware
 server.use(cors);
 server.use(bodyParser.json());
 
@@ -36,6 +39,7 @@ server.post('/user/login', auth.login);
 // process.env.MONGOLAB_URI ||
 // TODO: Protect mLab login credentials
 
+// Mongo connection
 mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
 	// mongoose.connect("mongodb://127.0.0.1:27017", function(err, db) {
 
@@ -46,13 +50,13 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 	}
 })
 
-
+// Server listener
 server.listen(process.env.PORT || 4000, function() {
 	server.use(express.static(__dirname));
 	server.use(gzippo.staticGzip("" + __dirname + "/dist"));
 	console.log("Server listening on port " + process.env.PORT);
 });
 
-server.listen(4000, function() {
-	console.log("Server listening on port 4000");
-});
+// server.listen(4000, function() {
+// 	console.log("Server listening on port 4000");
+// });
