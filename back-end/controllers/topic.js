@@ -143,7 +143,10 @@ module.exports = {
 				}
 			});
 		});
-	}
+	},
+	test: function(req, res) {
+		res.send("This is working correctly!");
+	});
 }
 
 function changeUserVote(topic, reason, user_id) {

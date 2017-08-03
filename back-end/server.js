@@ -15,9 +15,7 @@ var cors = require('./services/cors');
 server.use(cors);
 server.use(bodyParser.json());
 
-server.get('/', function(req, res) {
-	res.sendFile("index.html");
-})
+server.get('/', topic.test);
 
 server.get('/topic/:id', function(req, res, next) {
 	res.id = req.params.id;
@@ -53,7 +51,7 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 // Server listener
 server.listen(process.env.PORT || 4000, function() {
 	server.use(express.static(__dirname));
-	server.use(gzippo.staticGzip("" + __dirname + "/dist"));
+	// server.use(gzippo.staticGzip("" + __dirname + "/dist"));
 	console.log("Server listening on port " + process.env.PORT);
 });
 
