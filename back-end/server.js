@@ -15,7 +15,7 @@ var cors = require('./services/cors');
 server.use(cors);
 server.use(bodyParser.json());
 
-app.use(function(req, res) {
+server.use(function(req, res) {
 	// Use res.sendfile, as it streams instead of reading the file into memory.
 	res.sendfile(__dirname + '/public/index.html');
 });
