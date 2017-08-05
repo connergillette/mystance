@@ -17,7 +17,7 @@ server.use(bodyParser.json());
 
 server.use(function(req, res) {
 	// Use res.sendfile, as it streams instead of reading the file into memory.
-	res.sendfile(__dirname + '/../front-end/dist/index.html');
+	res.sendfile('/app/front-end/dist/index.html ');
 });
 
 server.get('/', topic.test);
