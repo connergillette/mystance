@@ -8,7 +8,7 @@
     "ng": "ng",
     "build": "cd front-end && gulp build && gulp serve",
     "postinstall": "cd front-end && bower install",
-    "postinstall": "ng build -prod"
+    "postinstall": "ng build"
   },
   "repository": {
     "type": "git",
