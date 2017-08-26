@@ -20,7 +20,9 @@ server.use(bodyParser.json());
 // 	res.sendfile('/front-end/dist/index.html');
 // });
 
-server.get('/', topic.test);
+server.get('/', function(req, res) {
+	res.sendfile('front-end/dist/index.html')
+});
 
 server.get('/topic/:id', function(req, res, next) {
 	res.id = req.params.id;
