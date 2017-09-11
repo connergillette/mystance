@@ -182,12 +182,12 @@
 			value: function handleUser() {
 				var vm = this;
 				if (!vm.$auth.getToken()) {
-					this.$http.get(DOMAIN_URL + "/user/add").then(function (token) {
+					this.$http.get("www.mystance.co" + "/user/add").then(function (token) {
 						console.log(token.data);
 						vm.$auth.setToken(token.data);
 					});
 				} else {
-					this.$http.post(DOMAIN_URL + "/user/login", {
+					this.$http.post("www.mystance.co" + "/user/login", {
 						token: vm.$auth.getToken()
 					}).then(function (user) {
 						// console.log("THIS SHOULD BE AN ID (handleUser()): " + user.data._id);
@@ -207,7 +207,7 @@
 			value: function getTopic() {
 				var vm = this;
 
-				this.$http.get(DOMAIN_URL + "/topic/featured").then(function (topic) {
+				this.$http.get("www.mystance.co" + "/topic/featured").then(function (topic) {
 					if (!topic) {
 						alert("Invalid topic id.");
 					}
@@ -225,7 +225,7 @@
 				var vm = this;
 
 				if (side == 'no') {
-					this.$http.post(DOMAIN_URL + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.no,
 						side: side,
 						user: user._id
@@ -234,7 +234,7 @@
 						document.getElementById("no-input").value = "";
 					});
 				} else if (side == 'yes') {
-					this.$http.post(DOMAIN_URL + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.yes,
 						side: side,
 						user: user._id
@@ -243,7 +243,7 @@
 						document.getElementById("yes-input").value = "";
 					});
 				} else if (side == 'maybe') {
-					this.$http.post(DOMAIN_URL + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.maybe,
 						side: side,
 						user: user._id
@@ -262,7 +262,7 @@
 				var vm = this;
 				var user = this.handleUser();
 
-				this.$http.post(DOMAIN_URL + "/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
 					reason: reason.text,
 					side: reason.side,
 					user: vm.user._id
@@ -311,7 +311,7 @@
 		_createClass(TopicController, [{
 			key: "addTopic",
 			value: function addTopic() {
-				this.$http.post(DOMAIN_URL + "/topic/add", {
+				this.$http.post("www.mystance.co" + "/topic/add", {
 					topic: this.topic
 				});
 			}
@@ -324,7 +324,7 @@
 			value: function getTopic(params) {
 				var vm = this;
 
-				this.$http.get(DOMAIN_URL + "/topic/" + params.id).then(function (topic) {
+				this.$http.get("www.mystance.co" + "/topic/" + params.id).then(function (topic) {
 					if (!topic) {
 						alert("Invalid topic id.");
 					}
@@ -338,7 +338,7 @@
 		}, {
 			key: "addReason",
 			value: function addReason() {
-				this.$http.post(DOMAIN_URL + "/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
+				this.$http.post("www.mystance.co" + "/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
 					reason: this.reason,
 					side: this.params.side
 				});
