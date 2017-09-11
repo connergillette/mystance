@@ -302,7 +302,7 @@
 			this.params = $stateParams;
 
 			// Gets Topic data on page load based on URL
-			this.getTopic($stateParams);
+			// this.getTopic($stateParams);
 		}
 
 		// Adds a topic with a given question
@@ -311,7 +311,7 @@
 		_createClass(TopicController, [{
 			key: "addTopic",
 			value: function addTopic() {
-				this.$http.post("/topic/add", {
+				this.$http.post("www.mystance.co/topic/add", {
 					topic: this.topic
 				});
 			}
