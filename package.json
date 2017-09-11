@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "ng": "ng",
     "build": "cd front-end && gulp build && gulp serve",
+    "heroku-postbuild": "gulp",
     "postinstall": "cd front-end && bower install"
   },
   "repository": {
