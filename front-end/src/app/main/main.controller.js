@@ -13,12 +13,12 @@ export class MainController {
 	handleUser() {
 		var vm = this;
 		if (!vm.$auth.getToken()) {
-			this.$http.get("www.mystance.co" + "/user/add").then(function(token) {
+			this.$http.get("/user/add").then(function(token) {
 				console.log(token.data);
 				vm.$auth.setToken(token.data);
 			});
 		} else {
-			this.$http.post("www.mystance.co" + "/user/login", {
+			this.$http.post("/user/login", {
 				token: vm.$auth.getToken()
 			}).then(function(user) {
 				// console.log("THIS SHOULD BE AN ID (handleUser()): " + user.data._id);
@@ -35,7 +35,7 @@ export class MainController {
 	getTopic() {
 		var vm = this;
 
-		this.$http.get("www.mystance.co" + "/topic/featured").then(function(topic) {
+		this.$http.get("/topic/featured").then(function(topic) {
 			if (!topic) {
 				alert("Invalid topic id.");
 			}
@@ -50,7 +50,7 @@ export class MainController {
 		var vm = this;
 
 		if (side == 'no') {
-			this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+			this.$http.post("/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 				reason: this.no,
 				side: side,
 				user: user._id
@@ -59,7 +59,7 @@ export class MainController {
 				document.getElementById("no-input").value = "";
 			});
 		} else if (side == 'yes') {
-			this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+			this.$http.post("/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 				reason: this.yes,
 				side: side,
 				user: user._id
@@ -68,7 +68,7 @@ export class MainController {
 				document.getElementById("yes-input").value = "";
 			});
 		} else if (side == 'maybe') {
-			this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+			this.$http.post("/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 				reason: this.maybe,
 				side: side,
 				user: user._id
@@ -86,7 +86,7 @@ export class MainController {
 		var vm = this;
 		var user = this.handleUser();
 
-		this.$http.post("www.mystance.co" + "/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+		this.$http.post("/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
 			reason: reason.text,
 			side: reason.side,
 			user: vm.user._id
