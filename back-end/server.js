@@ -1,5 +1,5 @@
 // Modules
-var gzippo = require("gzippo");
+// var gzippo = require("gzippo");
 var express = require("express");
 var server = express();
 var bodyParser = require('body-parser');
@@ -45,8 +45,8 @@ server.post('/user/login', auth.login);
 // TODO: Protect mLab login credentials
 
 // Mongo connection
-// mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
-mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
+mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
+	// mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 
 	if (!err) {
 		console.log("Connected to Mongo");

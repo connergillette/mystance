@@ -37,11 +37,12 @@ body {
     color: white;
     background-color: #a7c0cd;
     padding-bottom: 25px;
+    max-height: 150px;
 }
 
 .site-header {
-    font-size: 50pt;
-    padding-top: 25px;
+    font-size: 40pt;
+    // padding-top: 25px;
     padding-bottom: 0px;
 }
 
@@ -58,6 +59,20 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     // text-align: center;
+}
+
+.topic-right {
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 210px;
+}
+
+a > .topic-right:hover {
+  color: #a7c0cd;
+}
+
+a > .topic-right:visited {
+  color: #a7c0cd;
 }
 
 .topic-label {
