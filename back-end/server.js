@@ -15,6 +15,8 @@ var cors = require('./services/cors');
 server.use(cors);
 server.use(bodyParser.json());
 
+server.use(express.static('front-end/dist/'))
+
 // server.use(function(req, res) {
 // 	// Use res.sendfile, as it streams instead of reading the file into memory.
 // 	res.sendfile('/front-end/dist/index.html');
@@ -46,7 +48,7 @@ server.post('/user/login', auth.login);
 
 // Mongo connection
 mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.mlab.com:15712/heroku_1d5zllb6", function(err, db) {
-// mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
+	// mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 
 	if (!err) {
 		console.log("Connected to Mongo");
