@@ -93,7 +93,7 @@ module.exports = {
 								res.status(400);
 								res.send();
 							} else {
-								console.log(req.body);
+								// console.log(req.body);
 								changeUserVote(newTopic, newReason, req.body.user);
 								res.send(newTopic);
 							}
@@ -150,9 +150,6 @@ module.exports = {
 }
 
 function changeUserVote(topic, reason, user_id) {
-	// console.log("USER ID: " + user_id);
-
-	// console.log("ATTEMPTING TO CHANGE VOTE: " + user_id);
 	User.findOne({
 		_id: user_id
 	}).populate("responses").populate({
@@ -165,15 +162,12 @@ function changeUserVote(topic, reason, user_id) {
 		var newVote = true;
 		var voteIndex = -1;
 		for (var i = 0; i < user.responses.length; i++) {
-			console.log("TARGET: " + topic._id + ", CURRENT: " + user.responses[i].topic);
 			if (user.responses[i].topic.equals(topic._id)) {
-				console.log("Topic found!");
 				newVote = false;
 				voteIndex = i;
 				break;
 			}
 		}
-		console.log("ADDING NEW VOTE? " + newVote);
 
 		var vote = new Vote();
 		vote.topic = topic;
@@ -192,7 +186,7 @@ function changeUserVote(topic, reason, user_id) {
 			});
 		} else {
 			var oldVote = newUser.responses[voteIndex];
-			console.log(oldVote);
+			// console.log(oldVote);
 			newUser.responses[voteIndex] = vote;
 			User.findByIdAndUpdate(newUser._id, {
 				responses: newUser.responses
@@ -205,48 +199,8 @@ function changeUserVote(topic, reason, user_id) {
 				}, {
 					new: true
 				}, function(err, newReason) {
-					console.log(newReason);
 				});
-				console.log("User vote updated.");
 			});
 		}
-		// else {
-		// 	for (var i = 0; i < user.responses.length(); i++) {
-		// 		console.log(user.responses[i]);
-		// 		Vote.findOne({
-		// 			_id: user.responses[i]
-		// 		}).populate('topic reason').exec(function(err, currentVote) {
-		// 			// if (err) {
-		// 			// 	res.status(400);
-		// 			// 	res.send("Something went wrong.");
-		// 			// }
-		// 			if (currentVote.topic._id == topic._id) { // Find vote that points to the same topic
-		// 				// Update Topic with resulting changes
-		// 				Topic.findOne({
-		// 					_id: topic._id
-		// 				}).exec(function(err, target) {
-		// 					// if (err) { // TODO: Make separate function
-		// 					// 	res.status(400);
-		// 					// 	res.send("Something went wrong.")
-		// 					// } else {
-		// 					if (currentVote.side == vote.side) {
-		// 						if (currentVote.reason.side == 'no') {
-		// 							target.no[target.no.indexOf(currentVote)] = vote;
-		// 							target.no[target.no.indexOf(currentVote)].count--;
-		// 						} else if (currentVote.reason.side == 'yes') {
-		// 							target.yes[target.yes.indexOf(currentVote)] = vote;
-		// 							target.no[target.no.indexOf(currentVote)].count--;
-		// 						} else if (currentVote.reason.side == 'maybe') {
-		// 							target.maybe[target.maybe.indexOf(currentVote)] = vote;
-		// 							target.no[target.no.indexOf(currentVote)].count--;
-		// 						}
-		// 						currentVote = vote; // Update user vote
-		// 					}
-		// 					// }
-		// 				});
-		// 			}
-		// 		});
-		// 	}
-		// }
 	});
 }
