@@ -32,6 +32,7 @@ angular.module('mystanceFront', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitiz
 	.constant('API_URL', 'http://localhost:4000/')
 	.constant('malarkey', malarkey)
 	.constant('moment', moment)
+	.constant('DOMAIN_URL', 'www.mystance.co')
 	.config(config)
 	.config(routerConfig)
 	.run(runBlock)
