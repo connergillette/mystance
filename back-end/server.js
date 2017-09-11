@@ -21,7 +21,7 @@ server.use(bodyParser.json());
 // });
 
 server.get('/', function(req, res) {
-	res.sendfile('front-end/.tmp/serve/index.html')
+	res.sendfile('front-end/dist/index.html')
 });
 
 server.get('/topic/:id', function(req, res, next) {

@@ -5,6 +5,7 @@
   "main": "/back-end/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "grunt --env production",
     "ng": "ng",
     "build": "cd front-end && gulp build && gulp serve",
     "postinstall": "cd front-end && bower install"
