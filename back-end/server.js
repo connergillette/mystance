@@ -5,6 +5,7 @@ var server = express();
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var https = require('https');
 
 // Controllers and Services
 var topic = require('./controllers/topic');

@@ -1,7 +1,7 @@
 export class MainController {
 	constructor($https, $auth) {
 		'ngInject';
-		this.$httpss = $https;
+		this.$https = $https;
 		this.$auth = $auth;
 		this.user = this.handleUser();
 
