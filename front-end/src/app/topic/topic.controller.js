@@ -10,7 +10,7 @@ export class TopicController {
 
 	// Adds a topic with a given question
 	addTopic() {
-		this.$http.post("http://localhost:4000/topic/add", {
+		this.$http.post("/topic/add", {
 			topic: this.topic
 		});
 	}
@@ -20,7 +20,7 @@ export class TopicController {
 	getTopic(params) {
 		var vm = this;
 
-		this.$http.get("http://localhost:4000/topic/" + params.id).then(function(topic) {
+		this.$http.get("/topic/" + params.id).then(function(topic) {
 			if (!topic) {
 				alert("Invalid topic id.");
 			}
@@ -31,7 +31,7 @@ export class TopicController {
 	// ANTIQUATED - Now runs from main.controller.js
 	// Adds new Reason into a particular Topic's Side
 	addReason() {
-		this.$http.post("http://localhost:4000/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
+		this.$http.post("/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
 			reason: this.reason,
 			side: this.params.side
 		});

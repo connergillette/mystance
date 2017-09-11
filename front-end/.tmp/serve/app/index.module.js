@@ -182,12 +182,12 @@
 			value: function handleUser() {
 				var vm = this;
 				if (!vm.$auth.getToken()) {
-					this.$http.get("https://quiet-sierra-72284.herokuapp.com/user/add").then(function (token) {
+					this.$http.get("http://localhost:4000/user/add").then(function (token) {
 						console.log(token.data);
 						vm.$auth.setToken(token.data);
 					});
 				} else {
-					this.$http.post("https://quiet-sierra-72284.herokuapp.com/user/login", {
+					this.$http.post("http://localhost:4000/user/login", {
 						token: vm.$auth.getToken()
 					}).then(function (user) {
 						// console.log("THIS SHOULD BE AN ID (handleUser()): " + user.data._id);
@@ -207,7 +207,7 @@
 			value: function getTopic() {
 				var vm = this;
 
-				this.$http.get("https://quiet-sierra-72284.herokuapp.com/topic/featured").then(function (topic) {
+				this.$http.get("http://localhost:4000/topic/featured").then(function (topic) {
 					if (!topic) {
 						alert("Invalid topic id.");
 					}
@@ -225,7 +225,7 @@
 				var vm = this;
 
 				if (side == 'no') {
-					this.$http.post("https://quiet-sierra-72284.herokuapp.com/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.no,
 						side: side,
 						user: user._id
@@ -234,7 +234,7 @@
 						document.getElementById("no-input").value = "";
 					});
 				} else if (side == 'yes') {
-					this.$http.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.yes,
 						side: side,
 						user: user._id
@@ -243,7 +243,7 @@
 						document.getElementById("yes-input").value = "";
 					});
 				} else if (side == 'maybe') {
-					this.$http.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.maybe,
 						side: side,
 						user: user._id
@@ -262,7 +262,7 @@
 				var vm = this;
 				var user = this.handleUser();
 
-				this.$http.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
 					reason: reason.text,
 					side: reason.side,
 					user: vm.user._id
@@ -311,7 +311,7 @@
 		_createClass(TopicController, [{
 			key: "addTopic",
 			value: function addTopic() {
-				this.$http.post("http://localhost:4000/topic/add", {
+				this.$http.post("/topic/add", {
 					topic: this.topic
 				});
 			}
@@ -324,7 +324,7 @@
 			value: function getTopic(params) {
 				var vm = this;
 
-				this.$http.get("http://localhost:4000/topic/" + params.id).then(function (topic) {
+				this.$http.get("/topic/" + params.id).then(function (topic) {
 					if (!topic) {
 						alert("Invalid topic id.");
 					}
@@ -338,7 +338,7 @@
 		}, {
 			key: "addReason",
 			value: function addReason() {
-				this.$http.post("http://localhost:4000/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
+				this.$http.post("/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
 					reason: this.reason,
 					side: this.params.side
 				});
