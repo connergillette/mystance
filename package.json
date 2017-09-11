@@ -5,7 +5,6 @@
   "main": "/back-end/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "grunt --env production",
     "ng": "ng",
     "build": "cd front-end && gulp build && gulp serve",
     "postinstall": "cd front-end && bower install"
@@ -49,7 +48,6 @@
     "eslint-plugin-angular": "~0.12.0",
     "estraverse": "~4.1.0",
     "express": "^4.15.3",
-    "grunt": "^1.0.1",
     "gulp": "~3.9.0",
     "gulp-angular-templatecache": "~1.8.0",
     "gulp-autoprefixer": "~3.0.2",
