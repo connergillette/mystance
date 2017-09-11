@@ -162,13 +162,13 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var MainController = exports.MainController = function () {
-		MainController.$inject = ["$http", "$auth"];
-		function MainController($http, $auth) {
+		MainController.$inject = ["$https", "$auth"];
+		function MainController($https, $auth) {
 			'ngInject';
 
 			_classCallCheck(this, MainController);
 
-			this.$http = $http;
+			this.$httpss = $https;
 			this.$auth = $auth;
 			this.user = this.handleUser();
 
@@ -182,12 +182,12 @@
 			value: function handleUser() {
 				var vm = this;
 				if (!vm.$auth.getToken()) {
-					this.$http.get("http://localhost:4000/user/add").then(function (token) {
+					this.$https.get("https://quiet-sierra-72284.herokuapp.com/user/add").then(function (token) {
 						console.log(token.data);
 						vm.$auth.setToken(token.data);
 					});
 				} else {
-					this.$http.post("http://localhost:4000/user/login", {
+					this.$https.post("https://quiet-sierra-72284.herokuapp.com/user/login", {
 						token: vm.$auth.getToken()
 					}).then(function (user) {
 						// console.log("THIS SHOULD BE AN ID (handleUser()): " + user.data._id);
@@ -207,7 +207,7 @@
 			value: function getTopic() {
 				var vm = this;
 
-				this.$http.get("http://localhost:4000/topic/featured").then(function (topic) {
+				this.$https.get("https://quiet-sierra-72284.herokuapp.com/topic/featured").then(function (topic) {
 					if (!topic) {
 						alert("Invalid topic id.");
 					}
@@ -225,7 +225,7 @@
 				var vm = this;
 
 				if (side == 'no') {
-					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$https.post("https://quiet-sierra-72284.herokuapp.com/topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.no,
 						side: side,
 						user: user._id
@@ -234,7 +234,7 @@
 						document.getElementById("no-input").value = "";
 					});
 				} else if (side == 'yes') {
-					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$https.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.yes,
 						side: side,
 						user: user._id
@@ -243,7 +243,7 @@
 						document.getElementById("yes-input").value = "";
 					});
 				} else if (side == 'maybe') {
-					this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + side + "/reason/add/", {
+					this.$https.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + side + "/reason/add/", {
 						reason: this.maybe,
 						side: side,
 						user: user._id
@@ -262,7 +262,7 @@
 				var vm = this;
 				var user = this.handleUser();
 
-				this.$http.post("http://localhost:4000/topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
+				this.$https.post("https://quiet-sierra-72284.herokuapp.com//topic/" + vm.data._id + "/" + reason.side + "/reason/add/", {
 					reason: reason.text,
 					side: reason.side,
 					user: vm.user._id
