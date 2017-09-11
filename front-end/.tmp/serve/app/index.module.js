@@ -174,7 +174,7 @@
 
 			this.handleUser();
 			// Get Topic data to display on page load
-			// this.getTopic();
+			this.getTopic();
 		}
 
 		_createClass(MainController, [{
