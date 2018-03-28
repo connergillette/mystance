@@ -53,7 +53,7 @@ mongoose.connect("mongodb://heroku_1d5zllb6:tu1volnhoufb2smcl4tuc8uui7@ds115712.
 	}
 })
 
-Server listener
+// Server listener
 server.listen(process.env.PORT || 4000, function() {
 	server.use(express.static(__dirname));
 	// server.use(gzippo.staticGzip("" + __dirname + "/dist"));
