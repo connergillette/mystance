@@ -1,8 +1,10 @@
 export class TopicController {
-	constructor($http, $stateParams) {
+	constructor($http, $stateParams, $location) {
 		'ngInject';
 		this.$http = $http;
 		this.params = $stateParams;
+
+		this.host = $location.$$absUrl;
 
 		// Gets Topic data on page load based on URL
 		// this.getTopic($stateParams);
@@ -10,7 +12,7 @@ export class TopicController {
 
 	// Adds a topic with a given question
 	addTopic() {
-		this.$http.post("/topic/add", {
+		this.$http.post(this.host + "/topic/add", {
 			topic: this.topic
 		});
 	}
@@ -20,7 +22,7 @@ export class TopicController {
 	getTopic(params) {
 		var vm = this;
 
-		this.$http.get("/topic/" + params.id).then(function(topic) {
+		this.$http.get(this.host + "/topic/" + params.id).then(function(topic) {
 			if (!topic) {
 				alert("Invalid topic id.");
 			}
@@ -31,7 +33,7 @@ export class TopicController {
 	// ANTIQUATED - Now runs from main.controller.js
 	// Adds new Reason into a particular Topic's Side
 	addReason() {
-		this.$http.post("/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
+		this.$http.post(this.host + "/topic/" + this.params.id + "/" + this.params.side + "/reason/add/", {
 			reason: this.reason,
 			side: this.params.side
 		});
