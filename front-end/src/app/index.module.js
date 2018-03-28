@@ -29,7 +29,6 @@ import {
 } from '../app/components/malarkey/malarkey.directive';
 
 angular.module('mystanceFront', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'toastr', 'satellizer'])
-	.constant('API_URL', 'http://localhost:4000/')
 	.constant('malarkey', malarkey)
 	.constant('moment', moment)
 	.constant('DOMAIN_URL', 'www.mystance.co')
